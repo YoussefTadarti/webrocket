@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap");
 /*Start variables */
 :root {
-  --white: #fff;
+  --white: #fefffa;
   --main-color: #262f5a;
   --blue: #22cfe0;
   --green: #9cff88;
@@ -18,9 +18,11 @@
   margin: 0;
   padding: 0;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: "Nunito", sans-serif;
-  scroll-behavior: smooth;
   overflow-x: hidden;
   background-color: #eeeeee;
 }
@@ -58,6 +60,10 @@ img {
   height: 3px;
   margin-left: -38px;
 }
+.web-rocket {
+  color: var(--green);
+  font-weight: 600;
+}
 
 /*End Global Rules*/
 
@@ -66,7 +72,6 @@ img {
 ==========*/
 header {
   background-color: var(--main-color);
-  background-image: url(../images/stars_bg.png);
 }
 .container {
   padding: 0 2rem;
@@ -75,6 +80,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--main-color);
+  z-index: 2;
+  position: fixed;
+  width: 100%;
 }
 .nav-header {
   display: flex;
@@ -155,17 +164,25 @@ header {
 }
 .links > li a {
   color: var(--white);
-  text-transform: capitalize;
+  opacity: 0.8;
   font-size: 1.25rem;
   letter-spacing: var(--letterSpacing);
   padding: 1rem 0;
   transition: var(--transition);
 }
+.links > li a:hover {
+  color: var(--blue);
+  opacity: 1;
+}
+.active {
+  color: var(--blue) !important;
+  opacity: 1 !important;
+}
 /*========
    Header 
 ==========*/
 .banner {
-  padding-top: 2rem;
+  padding-top: 8rem;
   display: grid;
 }
 .banner > .banner-img {
@@ -215,6 +232,8 @@ header {
 }
 .btn-demande > a {
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .button-text,
 .button-icon {
@@ -229,12 +248,12 @@ header {
 
 .button-icon {
   font-size: 1.5rem;
-  background: #e8e8eb;
-  padding: 0.8rem;
+  background: var(--blue);
+  color: var(--green);
+  padding: 0.9rem;
 }
 .button-text {
   width: 100%;
-  padding: 1rem;
 }
 /*service */
 .service {
@@ -244,7 +263,7 @@ header {
 }
 .card-service {
   display: grid;
-  grid-template-columns: 1;
+  grid-template-columns: 1fr;
   border: solid var(--main-color);
   min-height: 390px;
   max-width: 340px;
@@ -292,10 +311,138 @@ header {
   font-size: larger;
   margin-bottom: 1.5rem;
 }
-.service-container {
+.service-container,
+.projets-container,
+.team-container {
   display: grid;
   gap: 4rem;
   grid-template-columns: 1fr;
+}
+.projets-container,
+.contact-container {
+  background-color: var(--main-color);
+  background-image: url(../images/stars_bg.png);
+}
+.card-projets {
+  border: solid var(--blue);
+  height: 340px;
+  width: 340px;
+  margin: 0 auto;
+}
+
+.card-projets img {
+  width: 20rem;
+}
+.card-projets .info-projets {
+  display: none;
+}
+
+.card-team {
+  border: solid var(--main-color);
+  height: 340px;
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.team-img {
+  border: 3px solid var(--main-color);
+  width: 10rem;
+  border-radius: 50%;
+}
+
+/*----Style sign-up-form  ----*/
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.form-box {
+  background-color: var(--light-text);
+  margin-bottom: 0;
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  position: relative; /* for control icons position */
+}
+
+.submit-btn,
+input {
+  width: 100%;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 16px 18px;
+  border: 0.063em solid hsla(246, 25%, 77%, 0.288);
+  border-radius: 0.313rem;
+  font-family: inherit;
+}
+
+input::placeholder {
+  letter-spacing: -0.1px;
+}
+
+input:focus {
+  outline: 0;
+  border: 0.063em solid var(--Dark-Blue);
+}
+
+/*------- Start Style Form Validation inputs  --------*/
+.error-msg,
+.fa-check-circle,
+.fa-exclamation-circle {
+  visibility: hidden;
+}
+
+.fa-check-circle,
+.fa-exclamation-circle {
+  position: absolute;
+  right: 5px;
+  bottom: 17px;
+}
+.success .fa-check-circle {
+  visibility: visible;
+  color: var(--Green);
+}
+
+.success input {
+  border: 1px solid var(--Green);
+}
+
+.error input {
+  border: 1px solid var(--Red);
+}
+.error .fa-exclamation-circle {
+  visibility: visible;
+  color: var(--Red);
+}
+
+.error-msg {
+  display: none !important;
+}
+.display-error-msg {
+  color: red;
+  float: right;
+  padding: 0 0 12px 0;
+  font-style: italic;
+}
+
+/*--- Start style submit button ---*/
+.submit-btn {
+  cursor: pointer;
+  background-color: var(--green);
+  color: var(--light-text);
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  box-shadow: 0px 4px 1px hsl(154, 59%, 46%);
+}
+.submit-btn:hover {
+  background-color: hsl(154, 59%, 46%);
 }
 
 /* Small */
@@ -303,15 +450,48 @@ header {
   .container {
     width: 750px;
   }
+
+  /*========
+   Header 
+==========*/
+  .banner {
+    padding-top: 6.7rem;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 25rem;
+    justify-content: space-between;
+    text-align: center;
+  }
+  .banner > .banner-img {
+    display: block;
+  }
+  .banner-content {
+    grid-gap: 1.5rem;
+  }
+
+  .header-title {
+    text-align: start;
+    font-size: 1.9rem;
+  }
+
+  .btn-demande {
+    justify-self: start;
+    width: 15rem;
+  }
+  .button-text {
+    padding: 1rem 0px;
+  }
+  .text {
+    max-width: 37rem;
+    text-align: initial;
+  }
 }
 /* Medium */
 @media (min-width: 992px) {
   .container {
     width: 970px;
   }
-  .nav-header {
-    width: fit-content;
-  }
+
   .menu-icon {
     display: none;
   }
@@ -337,42 +517,14 @@ header {
     padding: 0 0 0 1.75rem;
   }
 
-  /*========
-   Header 
-==========*/
-  .banner {
-    padding-top: 0rem;
-    align-items: center;
-    display: grid;
-    grid-template-columns: 1fr 25rem;
-    justify-content: space-between;
-    text-align: center;
-  }
-  .banner > .banner-img {
-    display: block;
-  }
-  .banner-content {
-    grid-gap: 1.5rem;
-  }
-
-  .header-title {
-    text-align: start;
-  }
-
-  .btn-demande {
-    justify-self: start;
-    width: 15rem;
-  }
-  .button-text {
-    padding: 1rem 0px;
-  }
-  .text {
-    max-width: 37rem;
-    text-align: initial;
-  }
   .service-container {
     display: grid;
     gap: 4rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .service-container,
+  .projets-container,
+  .team-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -380,5 +532,11 @@ header {
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
+  }
+  .banner {
+    padding-top: 4.7rem;
+  }
+  .header-title {
+    font-size: 2rem;
   }
 }
